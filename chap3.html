@@ -1,0 +1,72 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue上手</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <h1>Vue 上手</h1>
+  <h2>计算属性</h2>
+  <div id="app">
+    <p>这是data.text</p>
+    <p>{{ text }}</p>
+    <p>这是计算属性得到的text</p>
+    <p>{{ reverseText }}</p>
+    <p>fullname: {{ fullName }}</p>
+    <p>这是methods得到的 fullname</p>
+    <p>fullname: {{ getFullname() }}</p>
+    <span>{{ count }}</span>
+    <button @click='add'>点击 +1</button>
+  </div>
+
+
+  <div id='app2'>
+
+  </div>
+</body>
+<script>
+  var app2 = new Vue({
+    el: '#app2',
+    data: {
+      msg: '我是app2'
+    }
+  })
+  var app = new Vue({
+    el: '#app',
+    data: {
+      text: '123,456,789',
+      firstname: 'zhang',
+      lastname: 'san',
+      count: 0,
+    },
+    methods: {
+      add: function () {
+        this.count += 1
+      },
+      getFullname: function () {
+        return this.firstname + ' , ' + this.lastname + 'date: ' + new Date()
+      }
+    },
+    computed: {
+      reverseText: function () {
+        return this.text.split(',').reverse().join(',') + ' / ' + app2.msg
+      },
+      fullName: {
+        get: function () {
+          return this.firstname + ' , ' + this.lastname + 'date: ' + new Date()
+        },
+        set: function (newName) {
+          console.log('set fullName 被调用了')
+          this.firstname = newName.split(',')[0]
+          this.lastname = newName.split(',')[1]
+        }
+      }
+    }
+  })
+</script>
+
+</html>
