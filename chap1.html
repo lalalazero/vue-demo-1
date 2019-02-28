@@ -1,0 +1,76 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue上手</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <h1>Vue 上手</h1>
+  <h2>数据绑定和指令</h2>
+  <div id="app">
+    {{ message }}
+  </div>
+  <div id='app2'>
+    <span v-bind:title="message">
+      鼠标悬停几秒钟查看此处动态绑定的提示信息！
+    </span>
+  </div>
+  <div id='app3'>
+    <p v-if='seen'>现在你看到我了</p>
+  </div>
+  <div id="app4">
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+  </div>
+</body>
+
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      message: 'Hello World!'
+    }
+  })
+  var app2 = new Vue({
+    el: '#app2',
+    data: {
+      message: '页面加载于 ' + new Date().toLocaleString()
+    }
+  })
+  var app3 = new Vue({
+    el: '#app3',
+    data: {
+      seen: true
+    }
+  })
+  // 访问 vue 实例的属性
+  console.log('app => ', app.$el)
+  // 访问 vue 实例的 data 中的属性
+  console.log('app.message => ', app.message)
+
+  var app4 = new Vue({
+    el: '#app4',
+    data: {
+      todos: [
+        {
+          text: '学习 javascript',
+        },
+        {
+          text: '学习 vue',
+        },
+        {
+          text: '整个牛项目',
+        },
+      ]
+    }
+  })
+</script>
+
+</html>
