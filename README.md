@@ -11,7 +11,9 @@ vue 上手练习
     > ii. v-once
     
     > iii. v-if v-else-if v-else v-show
+    
     > iv. 数组方法 .push .pop .shift .unshift .splice .sort .reverse
       不会引起数组渲染的情况: 1. 修改数组指定项 2. 直接更改数组长度
-      解决方法: 1. Vue.set(app.arr, 1, 'text') 2. filter 返回新的数组
+      解决方法: 1. Vue.set(app.arr, 1, 'text') 2. splice 更新数组
+      
     > v. 快捷绑定事件 .stop .prevent .self .once .enter .delete .tab keyup.13
