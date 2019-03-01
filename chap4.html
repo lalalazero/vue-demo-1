@@ -1,0 +1,44 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue上手</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    .defaultBg {
+      background: white;
+    }
+    .active {
+      background: yellowgreen;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Vue 上手</h1>
+  <h2>v-bind和class和style的绑定</h2>
+  <div id="app">
+    <input type="button" :class='{defaultBg: true, active: isActive}' value='点击切换背景颜色' @click='changeColor'>
+    <input type="button" :class='["defaultBg", {active: isActive}]' value='点击切换背景颜色2' @click='changeColor'>
+    <input type='text' :style="{fontSize: '20px', color: 'red'}" value='绑定style'>
+  </div>
+</body>
+  <script>
+    var app = new Vue({
+      el: '#app',
+      data: {
+        isActive: true,
+        // defaultBg: {
+        //   defaultBg: true,
+        // },
+      },
+      methods: {
+        changeColor: function(){
+          this.isActive = !this.isActive
+        }
+      }
+    })
+  </script>
+</html>
