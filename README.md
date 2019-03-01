@@ -7,7 +7,9 @@ vue 上手练习
 - chap4 v-bind 绑定 style 和 class 的语法(变量、对象、数组)
 - chap5 vue 内置指令
     > i. v-cloak
+    
     > ii. v-once
+    
     > iii. v-if v-else-if v-else v-show
     > iv. 数组方法 .push .pop .shift .unshift .splice .sort .reverse
       不会引起数组渲染的情况: 1. 修改数组指定项 2. 直接更改数组长度
