@@ -1,0 +1,159 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue上手</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <style>
+    [v-cloak] {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+    <h1>Vue 上手</h1>
+    <h2>Vue 的内置指令</h2>
+    <div id="app">
+        <ul>
+            <li>
+              <h3>v-cloak : 解决初始化慢导致页面闪动</h3>
+              <h4>常与 <code>display: none</code> 结合使用</h4>
+              <p v-cloak>{{msg}}</p>
+            </li>
+            <li>
+                <h3>v-once : 只渲染一次，后续都不再重新渲染</h3>
+                <p v-once>{{oncedata}}</p>
+            </li>
+            <li>
+              <h3>条件渲染 v-if v-else v-else-if v-show</h3>
+              <p>我是 count 的值 =>  {{count}}</p>
+              <input type="button" value="点击+1" @click="add">
+              <p v-if="count % 2 === 0">偶数</p>
+              <p v-else-if='count % 3 === 0'>是 3 的倍数</p>
+              <p v-else>奇数</p>
+              <p v-show='count % 2 === 1'>v-show 大于0的奇数</p>
+            </li>
+            <li>
+              <p>用 v-for 遍历数组</p>
+              <ul>
+                <li v-for="item in arr">{{item.name}}</li>
+              </ul>
+              <hr>
+              <p>拿到index</p>
+              <ul>
+                <li v-for='(item,index) in arr'>index = {{index}}, {{item.name}}</li>
+              </ul>
+              <p>用 v-for 遍历对象</p>
+              <div v-for='p in actress'>{{p}}</div>
+              <hr>
+              <p>拿到value-key-index v-k-i</p>
+              <div v-for='(v,k,i) in actress'>value={{v}}, key={{k}}, index={{i}}</div>
+            </li>
+            <li>
+              <p>数组方法:对数组的修改会引起页面重新渲染</p>
+              <span v-for='value in arrMethods'>{{value}} &nbsp;</span>
+              <h4>vue检测不到的数组变动情况:</h4>
+              <p>对数组指定项的修改 arr[1]='text'</p>
+              <p>直接修改数组长度 arr.length = 10</p>
+              <h4>对应的解决方案：</h4>
+              <p>修改指定项: Vue.set(app.arr, 1, 'text') </p>
+              <p>修改数组: filter，返回新的数组</p>
+            </li>
+            <li>
+              <h4>vue 的事件</h4>
+              <p>@click.stop 阻止冒泡</p>
+              <div @click='divClick' style='height: 100px; width: 100px; background-color: turquoise'>
+                <button @click.stop='btnClick'>点击</button>
+              </div>
+              <p>@click.self 事件发生在自己身上</p>
+              <div @click.self='divClick' style='height: 100px; width: 100px; background-color: turquoise'>
+                <button @click='btnClick'>点击</button>
+              </div>
+              <div>
+                {{btnMsg}}
+                {{divMsg}}
+              </div>
+              <div>
+                <p>@submit.prevent 阻止默认事件</p>
+                <form @submit.prevent='submit'>
+                  我是一个form表单, {{formMsg}}
+                  <input type="submit" value="点击提交">
+                </form>
+              </div>
+
+              <div>
+                <p>.once 执行一次</p>
+                <input type="button" value="once" @click.once='once'>
+              </div>
+              <div>
+                <p>@keyup.13</p>
+                <input type="text" name="name" id="name" @keyup.13='enterKey'
+                placeholder="请输入name,按下enter键提交">
+              </div>
+              <div>
+                <p>vueJS 提供的快捷事件绑定</p>
+                <span>.enter</span>
+                <span>.tab</span>
+                <span>.delete</span>
+              </div>
+            </li>
+          </ul>
+    </div>
+    
+  
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      msg: "今天是好天气",
+      oncedata: "这个是只渲染一次的data",
+      count: 0,
+      btnMsg: '',
+      divMsg: '',
+      formMsg: '',
+      arrMethods:[
+        'pop','push','shift','unshift','splice','sort','reverse'
+      ],
+      arr:[
+        {
+          name: '多思考',
+        },
+        {
+          name: '多总结',
+        },
+        {
+          name: '敲代码敲代码敲代码',
+        },
+      ],
+      actress: {
+        1: '迪丽热巴',
+        2: '古力娜扎',
+        3: '佟丽娅',
+      }
+    },
+    methods: {
+      enterKey:function(){
+        alert('enter key up..')
+      },
+      once:function(){
+        alert('once..')
+      },
+      add:function(){
+        this.count += 1;
+      },
+      divClick: function(){
+        this.divMsg = 'div 被点击了'
+      },
+      btnClick: function(){
+        this.btnMsg = 'btn 被点击了'
+        this.divMsg = ''
+      },
+      submit: function(){
+        this.formMsg = 'form表单点击提交了..'
+      }
+    }
+  })
+</script>
+</html>
