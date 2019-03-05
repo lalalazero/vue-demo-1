@@ -20,12 +20,16 @@
 
     <hr>
     单选框：<br>
-    单个单选框: <input type="radio" :checked='oneradio'> <br>
+    单个单选框: 用 v-bind <input type="radio" :checked='oneradio'> <br>
+    单个单选框: 用 v-model(不生效) <input type="radio" v-model='oneradio'> <br>
     多个多选框:
     小猫：<input type="radio" name='checks' value='小猫' v-model='checkname'>
     小狗：<input type="radio" name='checks' value='小狗' v-model='checkname'>
     小鸭：<input type="radio" name='checks' value='小鸭' v-model='checkname'><br>
     ----- 绑定的值: {{checkname}}
+    <hr>
+    复选框：<br>
+    单个复选框: 用 v-bind <input type="checkbox" :>
   </div>
 
 </body>
