@@ -33,6 +33,7 @@ vue 内置指令
   2. 单选框 radio
 
       单个单选框：v-bind
+      
       多个单选框：v-model 配合 value 使用
   
   3. 复选框 checkbox
