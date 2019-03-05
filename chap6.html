@@ -11,25 +11,98 @@
 <body>
   <h1>Vue 上手</h1>
   <h2>表单和 v-model</h2>
-  <div id="app">
+  <div id="app" style="margin-bottom: 200px">
     <p>input框绑定</p>
     <input type="text" v-model='value'>
     {{value}}
     <br>
+    文本框:<br>
     <textarea cols="30" rows="10" v-model='msg'>我是多行文本的初始化值</textarea>
 
     <hr>
     单选框：<br>
     单个单选框: 用 v-bind <input type="radio" :checked='oneradio'> <br>
     单个单选框: 用 v-model(不生效) <input type="radio" v-model='oneradio'> <br>
-    多个多选框:
+    多个多选框:<br>
     小猫：<input type="radio" name='checks' value='小猫' v-model='checkname'>
     小狗：<input type="radio" name='checks' value='小狗' v-model='checkname'>
     小鸭：<input type="radio" name='checks' value='小鸭' v-model='checkname'><br>
     ----- 绑定的值: {{checkname}}
     <hr>
     复选框：<br>
-    单个复选框: 用 v-bind <input type="checkbox" :>
+    单个复选框: 用 v-bind <input type="checkbox" :checked='oneradio'>
+    单个复选框: 用 v-model <input type="checkbox" v-model='oneradio'>
+    <br>
+    多个复选框:<br>
+    小猫：<input type="checkbox" value='小猫' v-model='checks'>
+    小狗：<input type="checkbox" value='小狗' v-model='checks'>
+    小鸭：<input type="checkbox" value='小鸭' v-model='checks'><br>
+    ---- 绑定的值：{{ checks }}
+    <hr>
+    单选的下拉框：
+    <select v-model='selected'>
+      <option value="小猫">小猫</option>
+      <option value="小狗">小狗</option>
+      <option value="小鸭">小鸭</option>
+    </select>
+    ----- 选中的值是: {{ selected }}
+    <br>
+    <br>
+    <br>
+    <br>
+    多选的下拉框：
+    <select v-model='selectedmul' multiple>
+      <option value="小猫">小猫</option>
+      <option value="小狗">小狗</option>
+      <option value="小鸭">小鸭</option>
+    </select>
+    ----- 选中的值是: {{ selectedmul }}
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <hr>
+    动态绑定值:<br>
+    <input type="radio" v-model='radio1' :value='value1'>
+    ---- v-model 获取绑定的值{{radio1}} <br>
+    复选框: 选中和不选中的值不一样 <br>
+    true-value 和 false-value 属性 <br>
+    动态绑定值：<input type="checkbox" v-model='toggle' :true-value='checkValue1' :false-value='uncheckValue1'>
+    --- 绑定的值是：{{toggle}}
+    <hr>
+    下拉框：<br>
+    value 绑定在 select 上
+    <select v-model='valueselect' :value='{num: 1}'>
+      <option value="小猫">小猫</option>
+      <option value="小狗">小狗</option>
+      <option value="小鸭">小鸭</option>
+    </select>
+    ---- 现在选中的值类型{{ typeof valueselect}},值是{{valueselect}}
+    <br>
+    value 绑定在 option 上
+    <select v-model="valueselect2" >
+        <option :value="{name: 小猫}">小猫</option>
+        <option :value='{name: 小狗}'>小狗</option>
+        <option :value='{name: 小鸭}'>小鸭</option>
+      </select>
+      ---- 现在选中的值类型{{ typeof valueselect2}},值是{{valueselect2}}
+
+      <hr>
+      修饰符:<br>
+      lazy<br>
+      <input type="text" v-model='inputStr'>---{{inputStr}}
+      <br><input type="text" v-model.lazy='inputStr2'>---{{inputStr2}}
+
+      <br>
+      number<br>
+      <input type="text" v-model.number='inputNum'> -----类型是{{typeof inputNum}}
+
+      <br>
+      trim<br>
+      <input type="text" v-model='trimInput1'> ----没有trim的长度{{trimInput1.length}}
+      <br><input type="text" v-model.trim='trimInput2'> -----trim过后的长度{{trimInput2.length}}
+
   </div>
 
 </body>
@@ -39,8 +112,23 @@
     data: {
       value: '你好',
       msg: '多行文本的默认值',
-      oneradio:true,
-      checkname: '小狗'
+      oneradio: true,
+      checkname: '小狗',
+      checks: [],
+      selected: '',
+      selectedmul: '',
+      value1: 'xxxx',
+      radio1: '',
+      toggle: true,
+      checkValue1: '被选中了',
+      uncheckValue1: '没有被选中',
+      valueselect: '',
+      valueselect2: '',
+      inputStr: '',
+      inputStr2:'',
+      inputNum: '',
+      trimInput1: '',
+      trimInput2: '',
     }
   })
 </script>
