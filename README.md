@@ -24,4 +24,15 @@ vue 内置指令
       解决方法: 1. Vue.set(app.arr, 1, 'text') 2. splice 更新数组
       
     > v. 快捷绑定事件 .stop .prevent .self .once .enter .delete .tab keyup.13
-- chap6 表单和v-model
+- chap6 表单和 v-model
+  
+  1. input 和 textarea 
+  
+      用 v-model 绑定，（如果有初始化值会被忽略)
+  
+  2. 单选框 radio
+
+      单个单选框：v-bind
+      多个单选框：v-model 配合 value 使用
+  
+  3. 复选框 checkbox
