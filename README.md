@@ -1,11 +1,16 @@
 # vue-demo-1
 vue 上手练习
 
-- chap1 <script> 引入 vue
-- chap2 过滤器 | 指令 v-bind v-on v-text v-html 事件语法糖 v-bind/: v-on/@
+- chap1 `<script>` 标签引入 `vue`
+- chap2 
+过滤器 | 
+指令 v-bind v-on v-text v-html 
+事件语法糖 v-bind/: v-on/@
 - chap3 计算属性
-- chap4 v-bind 绑定 style 和 class 的语法(变量、对象、数组)
-- chap5 vue 内置指令
+- chap4 
+v-bind 绑定 style 和 class 的语法(变量、对象、数组)
+- chap5 
+vue 内置指令
     > i. v-cloak
     
     > ii. v-once
