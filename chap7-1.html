@@ -1,0 +1,41 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <h1>Vue 上手</h1>
+  <h2>组件注册和挂载</h2>
+  <div id="app">
+    <my-component></my-component>
+    <app-component></app-component>
+    
+    <table>
+      <tbody is='my-component'></tbody>
+    </table>
+  </div>
+</body>
+<script>
+    // 注册组件
+    // Vue.component(tag,{
+    //   template: '<div></div>'
+    // })
+      Vue.component('my-component',{
+        template: '<div>我是一个全局组件</div>'
+      })
+      var app = new Vue({
+        el: '#app',
+        components: {
+          'app-component': {
+            template: '<div>app内局部注册的组件</div>'
+          }
+        }
+      })
+</script>
+
+</html>

@@ -37,3 +37,7 @@ vue 内置指令
       多个单选框：v-model 配合 value 使用
   
   3. 复选框 checkbox
+
+- chap7 组件
+
+    1. 7-1 组件的注册和挂载
