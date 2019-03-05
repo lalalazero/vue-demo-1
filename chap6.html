@@ -1,0 +1,44 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <h1>Vue 上手</h1>
+  <h2>表单和 v-model</h2>
+  <div id="app">
+    <p>input框绑定</p>
+    <input type="text" v-model='value'>
+    {{value}}
+    <br>
+    <textarea cols="30" rows="10" v-model='msg'>我是多行文本的初始化值</textarea>
+
+    <hr>
+    单选框：<br>
+    单个单选框: <input type="radio" :checked='oneradio'> <br>
+    多个多选框:
+    小猫：<input type="radio" name='checks' value='小猫' v-model='checkname'>
+    小狗：<input type="radio" name='checks' value='小狗' v-model='checkname'>
+    小鸭：<input type="radio" name='checks' value='小鸭' v-model='checkname'><br>
+    ----- 绑定的值: {{checkname}}
+  </div>
+
+</body>
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      value: '你好',
+      msg: '多行文本的默认值',
+      oneradio:true,
+      checkname: '小狗'
+    }
+  })
+</script>
+
+</html>
