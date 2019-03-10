@@ -14,7 +14,8 @@
   <div id="app">
     <my-component></my-component>
     <app-component></app-component>
-    
+    <btn-component></btn-component>
+    <btn-component></btn-component>
     <table>
       <tbody is='my-component'></tbody>
     </table>
@@ -33,7 +34,23 @@
         components: {
           'app-component': {
             template: '<div>app内局部注册的组件</div>'
+          },
+          'btn-component': {
+            template: '<div>我是 btn component<br>\
+            <button @click="count++">点我+1 => {{ count }}</button>\
+            </div>',
+            data: function(){
+              return {
+                count: 0
+              }
+            }
           }
+          // 错误示范
+          // 'xxxComponent':{ // 命名错误
+          //   template: 'xxxComponent', // 没有被 DOM 元素包裹，错误
+          //   data:{ // data 不是方法，错误
+          //   }
+          // }
         }
       })
 </script>
