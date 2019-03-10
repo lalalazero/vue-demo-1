@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <h1>Vue 上手</h1>
+  <h2>访问 slot </h2>
+  <div id="app">
+    <my-component>
+      <p>我是父组件插入的东西</p>
+    </my-component>
+    <my-component>
+
+    </my-component>
+    <hr>具名插槽
+    <name-component>
+      <h3 slot='header'><span>我是标题</span></h3>
+      <p>我是正文第一段</p>
+      <p>我是正文第二段</p>
+      <p slot='footer'>我是底部信息</p>
+    </name-component>
+  </div>
+  <script>
+    Vue.component('my-component',{
+      template: '<div style="border: 1px solid blue; padding: 5px;">我是一个组件<br>\
+        <slot><p>如果父组件没有插入内容，我是默认内容展示</p></slot>\
+      </div>'
+    })
+    Vue.component('name-component',{
+      template: '<div style="border: 1px solid blue; padding: 5px;">我是一个组件<br>\
+        <div class="header">\
+        <slot name="header"></slot></div>\
+        <slot><p>如果父组件没有插入内容，我是默认内容展示</p></slot>\
+        <div class="footer">\
+        <slot name="footer"></slot></div>\
+      </div>',
+      mounted: function(){
+        var header = this.$slots.header
+        var text = header[0].elm.innerText
+        var html = header[0].elm.innerHTML
+        console.log('text => ', text)
+        console.log('html => ', html)
+      }
+    })
+    var app = new Vue({
+      el: '#app',
+    })
+  </script>
+</body>
+
+</html>

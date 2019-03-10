@@ -68,3 +68,5 @@ v-bind 绑定 style 和 class 的语法(变量、对象、数组)
     9. 7-9 使用 slot 分发内容（单个 slot 和 具名 slot)
 
     10. 7-10 作用域 slot（从子组件获取数据）
+
+    11. 7-11 访问 slot 
