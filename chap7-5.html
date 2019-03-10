@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <h1>Vue 上手</h1>
+    <h2> $emit() 子组件向父组件传递数据</h2>
+    <div id="app">
+        <h1>我是父组件</h1>
+        <p>当前的数字是 {{ count }}</p>
+        <son-component @change='handleTotal'></son-component>
+    </div>
+    <script>
+        Vue.component('son-component',{
+            template: '<div :style="style">我是子组件\
+            <button @click="add">点击+100</button>\
+            <button @click="minus">点击-100</button>\
+            </div>',
+            computed: {
+                style: function(){
+                    return {
+                        border: '1px solid red',
+                        padding: '10px 0'
+                    }
+                }
+            },
+            data:function(){
+                return {
+                    count: 1000,
+                }
+            },
+            methods: {
+                add: function(){
+                    this.count += 100
+                    this.$emit('change', this.count)
+                },
+                minus: function(){
+                    this.count -= 100
+                    this.$emit('change', this.count)
+                }
+            }
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+                count: 1000,
+            },
+            methods: {
+                handleTotal: function(total){
+                    this.count = total
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
