@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <h1>Vue 上手</h1>
+  <h2>组件作用域</h2>
+  <div id="app" style="border: 1px solid red; padding: 5px">
+    <p>我是父组件</p>
+    <!-- childshow 绑定的是父元素的值 -->
+    <my-component v-show='childshow'> 
+      {{ msg }}
+    </my-component>
+    {{ msg }}
+  </div>
+  <script>
+    Vue.component('my-component',{
+      template: '<div>我是子组件</div>',
+      data: function(){
+        return {
+          msg: '子组件的msg',
+          childshow: true,
+        }
+      }
+    })
+    var app = new Vue({
+      el: '#app',
+      data: {
+        msg: '父组件的msg',
+        childshow: false,
+      }
+    })
+  </script>
+</body>
+
+</html>
