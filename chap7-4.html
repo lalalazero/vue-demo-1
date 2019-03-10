@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+</head>
+<body>
+    <h1>Vue 上手</h1>
+    <h2>数据验证</h2>
+    <div id="app">
+        <!-- <myComponent myProp='xxx'></myComponent> 错误命名 -->
+        <!-- <my-component my-prop='xxx'></my-component> 正确命名 -->
+        <my-component my-msg='xxx'></my-component>
+        <type-component :a='a' :b='b' :c='c' :d='d' :e='e' :f='f'></type-component>
+    </div>
+    <script>
+        // 命名规范
+        Vue.component('my-component',{
+            props: ['myMsg'], // 此处是驼峰
+            template: '<div>{{ abc }}</div>',
+            data: function(){
+                return {
+                    abc: this.myMsg // 此处是驼峰
+                }
+            }
+        })
+
+        // 对 props 传递的属性进行类型验证
+        Vue.component('type-component',{
+            props: {
+                a: Number, // a 属性必须是一个数字,
+                b: [String, Number], // b 可以是一个字符串，也可以是一个数字
+                c: {
+                    type: Boolean,
+                    required: true,
+                    default: false
+                },
+                d: {
+                    type: Array,
+                    default: function(){
+                        return []
+                    }
+                },
+                e: {
+                    // 自定义一个验证函数
+                    validator: function(value){
+                        return value > 10
+                    }
+                },
+                f: {
+                    type: Function,
+                }
+            },
+            template: '<div>{{ a }} {{ b }} {{ c }} {{ d }}</div>'
+        })
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                a: 0,
+                b: 'hello',
+                c: true,
+                d: [111],
+                e: 1, // 验证通不过 
+                f: 123 || console.log() // 123 验证通不过
+            },
+        })
+    </script>
+
+</body>
+</html>
