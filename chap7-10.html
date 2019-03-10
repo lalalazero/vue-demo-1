@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Vue</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <h1>Vue 上手</h1>
+  <h2>作用域插槽 slot</h2>
+  <div id="app">
+    <my-component>
+
+      <!-- vue 2.5.0 以前的作用域插槽只能写在 template 标签里面 -->
+      <!-- <template slot='xxx' slot-scope='prop'>
+        {{ prop.text }} <br>
+        {{ prop.ss }}
+      </template> -->
+      <!-- vue 2.5.0 以后的作用域插槽可以直接写在 html 的其他标签里 -->
+      <p slot='xxx' slot-scope='test'>
+        写在 p 标签里 <br>
+        {{ test.text }} <br>
+        {{ test.ss }}
+      </p>
+    </my-component>
+  </div>
+  <script>
+    Vue.component('my-component',{
+      template: '<div>我是一个组件\
+      <slot text="slot的text" name="xxx" ss="自定义任何属性都ok的"></slot>\
+      </div>'
+    })
+    var app = new Vue({
+      el: '#app',
+    })
+  </script>
+</body>
+
+</html>
