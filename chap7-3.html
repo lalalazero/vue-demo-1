@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <h1>Vue 上手</h1>
+    <h2>props 和单项数据流</h2>
+    
+    <div id="app">
+        props作为初始值保存起来
+        <my-component msg='我是传递的消息'></my-component>
+        <hr>props经过计算或者转化保存起来<br>
+        <p>输入宽度数字:</p>
+        <input type="text" v-model='width' placeholder="输入宽度数字"> 
+        <width-component :width='width'></width-component>
+    </div>
+</body>
+<script>
+    // 注册组件
+    Vue.component('my-component',{
+        props: ['msg'],
+        template: '<div>我是一个全局vue组件<br>{{ receive_msg }}</div>',
+        data: function(){
+            return {
+                // props 中的值可以通过 this 直接获取
+                receive_msg: this.msg
+            }
+        }
+    })
+
+    // 注册组件
+    Vue.component('width-component',{
+        props: ['width'],
+        template: '<div :style="style"></div>',
+        // data: function(){
+        //     return {
+
+        //     }
+        // },
+        computed: {
+            style: function(){
+                return {
+                    // this.width 就是 props 的 width
+                    width: this.width + 'px',
+                    backgroundColor: 'red', // 这里要驼峰
+                    height: '30px',
+                }
+            }
+        }
+    })
+
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            width: 0,
+        }
+    })
+</script>
+
+</html>
