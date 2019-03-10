@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <h1>Vue 上手</h1>
+    <h2>非父子组件的通信：父链、子链</h2>
+    <div id="app">
+        <p>我是父组件, {{ msg }}</p>
+        <button @click='grabChild'>点击获取子组件的msg</button>---{{fromchild}}
+        <a-component ref='a'></a-component>
+        <b-component ref='b'></b-component>
+        <c-component ref='c'></c-component>
+    </div>
+    <script>
+        Vue.component('a-component',{
+            template: '<div>我是A组件<button @click="handle">\
+            点击向B组件发送消息</button></div>',
+            data: function(){
+                return {
+                    msg: '我是A组件的msg'
+                }
+            },
+            methods: {
+                handle: function(){
+                    // 触发 xxx 事件
+                    this.$root.bus.$emit('xxx', 'hello!')
+                }
+            }
+        })
+        Vue.component('b-component',{
+            template: '<div></div>',
+            data: function(){
+                return {
+                    msg: '我是B组件的msg'
+                }
+            },
+            created: function(){
+                // 监听 xxx 事件
+                this.$root.bus.$on('xxx',function(value){
+                    alert('我是B组件，收到来自A组件的消息：' + value)
+                })
+            }
+        })
+        Vue.component('c-component',{
+            template: '<div>我是C组件<button @click="setFatherData">\
+            点击修改父组件的数据</button></div>',
+            data: function(){
+                return {
+                    msg: '我是C组件的msg'
+                }
+            },
+            methods: {
+                setFatherData: function(){
+                    this.$parent.msg = '父亲数据已经被修改'
+                }
+            }
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+                // bus 中介
+                bus: new Vue(),
+                msg: '父亲数据初始化',
+                fromchild: ''
+            },
+            methods: {
+                grabChild: function(){
+                    this.fromchild = this.$refs.c.msg
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

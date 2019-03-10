@@ -41,6 +41,7 @@
                 add: function(){
                     this.count += 100
                     // this.$emit('change', this.count)
+                    // 这一行触发了 input 事件
                     this.$emit('input', this.count)
                 },
             }
