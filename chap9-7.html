@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <h1>Vue 上手</h1>
+    <h2>作用域插槽在render函数中的使用</h2>
+    <div id="app">
+        <child>
+            <template scope="prop">
+                {{ prop.text }}
+                {{ prop.msg }}
+            </template>
+        </child>
+    </div>
+
+    <script>
+
+        // 使用 render 函数进行定义组件
+        Vue.component('child',{
+            render: function(createElement){
+                // 相当于 <div><slot :text="text" :msg="msg"></slot></div>
+                return createElement('div', this.$scopedSlots.default({
+                    text: '我是自组件传递过来的数据',
+                    msg: 'scopedText'
+                }))
+            }
+        })
+        var app = new Vue({
+            el: '#app',
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <h1>Vue 上手</h1>
+    <h2>render函数中使用slots</h2>
+    <div id="app">
+        <child>
+            <p>锄禾日当午</p>
+            <p>汗滴禾下土</p>
+            <h3 slot='header'>我是标题</h3>
+            <h5 slot='footer'>我是文章的最后一段</h5>
+        </child>
+    </div>
+
+    <script>
+
+        // 使用 render 函数进行定义组件
+        Vue.component('child',{
+            render: function(createElement){
+                var header = this.$slots.header // header 是 Vnode 虚拟节点的数组
+                var main = this.$slots.default
+                var footer = this.$slots.footer
+                // createElement 返回的是 Vnode 虚拟节点
+                return createElement('div',[
+                    createElement('header',header),
+                    createElement('main', {
+                        style: {
+                            color: 'red',
+                        }
+                    },main),
+                    createElement('footer',footer)
+                ])
+            }
+        })
+        var app = new Vue({
+            el: '#app',
+        })
+    </script>
+</body>
+
+</html>

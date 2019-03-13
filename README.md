@@ -74,3 +74,7 @@ v-bind 绑定 style 和 class 的语法(变量、对象、数组)
     12. 7-12 动态组件
 
 - chap8 自定义指令
+
+- chap9 render 函数
+
+- chap10 函数化组件

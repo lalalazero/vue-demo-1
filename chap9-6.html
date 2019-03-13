@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <h1>Vue 上手</h1>
+    <h2>v-model在render函数中的使用</h2>
+    <div id="app">
+        <child :name='name' @input="showname"></child>
+        <hr>
+        用 v-model 绑定
+        <child v-model='name'></child>
+        <hr>
+        {{ name }}
+    </div>
+
+    <script>
+
+        // 使用 render 函数进行定义组件
+        Vue.component('child',{
+            props: ['name'],
+            render: function(createElement){
+                var self = this; // 指的就是当前的 VUE component 实例
+                return createElement('input',{
+                    // 原生 dom 属性
+                    domProps: {
+                        value: self.name
+                    },
+                    on: {
+                        input: function(event){
+                            // var a = this // 这里的 this 是 window
+                            self.$emit('input', event.target.value)
+                        }
+                    },
+                    style: {
+                        color: 'pink'
+                    }
+                })
+            },
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+                name: 'jack'
+            },
+            methods: {
+                showname: function(value){
+                    this.name = value
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

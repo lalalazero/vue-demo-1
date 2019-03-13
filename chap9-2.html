@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <h1>Vue 上手</h1>
+    <h2>render函数</h2>
+    <div id="app">
+        <child>
+        </child>
+        <child-a></child-a>
+    </div>
+    <script>
+        // 使用 render 函数进行定义组件
+        Vue.component('child',{
+            render: function(createElement){
+                // return createElement('h')
+                // return createElement({
+                //     template: '<div>hello world</div>'
+                // })
+                var domFunc = function(){
+                    return {
+                        template: '<div>hello world</div>'
+                    }
+                }
+                return createElement(domFunc())
+            }
+        })
+
+        Vue.component('child-a',{
+            render: function(createElement){
+                return createElement({
+                        template: '<div>hello world</div>'
+                    },
+                    // 第二个参数 数据对象，可选
+                    {
+                        class: {
+                            foo: true,
+                            bar: false,
+                        },
+                        style: {
+                            color: 'red',
+                            fontSize: '20px',
+                        },
+                        // 正常的 html 属性
+                        attrs: {
+                            id: 'foo',
+                            src: 'http://baidu.com'
+                        },
+                        // 原生的 dom 属性
+                        domProps: {
+                            // innerHTML: '<span style="color: blue">hahahahaha</span>',
+                            innerText: 'hahaha'
+                        }
+                    })
+            }
+        })
+        var app = new Vue({
+            el: '#app',
+        })
+    </script>
+</body>
+
+</html>

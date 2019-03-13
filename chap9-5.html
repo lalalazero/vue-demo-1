@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <h1>Vue 上手</h1>
+    <h2>render函数中使用props</h2>
+    <div id="app">
+        <child :show='show'>
+        </child>
+        <button @click='switchShow'>点击切换图片</button>{{ show }}
+    </div>
+
+    <script>
+
+        // 使用 render 函数进行定义组件
+        Vue.component('child',{
+            props: ['show'],
+            render: function(createElement){
+                if(this.show){
+                    return createElement('h','我现在被你看到啦')
+                }else{
+                    return createElement('h','你看不到我看不到我')
+                }
+                
+            }
+        })
+        var app = new Vue({
+            el: '#app',
+            data: {
+                show: false,
+            },
+            methods: {
+                switchShow: function(){
+                    this.show = !this.show
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

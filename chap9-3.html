@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <h1>Vue 上手</h1>
+    <h2>render函数</h2>
+    <div id="app">
+        <child>
+        </child>
+    </div>
+
+    <script>
+
+        // 使用 render 函数进行定义组件
+        Vue.component('child',{
+            props: ['level'],
+            render: function(createElement){
+                // 由于第二个参数只能是一个数据对象，所以如果是数组那么就是第三个参数
+                // 第三个参数，可以是 string 或者 array，代表子节点
+                return createElement('div',[
+                    createElement('h1','我是h1标题'),
+                    createElement('h6','我是h6标题')
+                ])
+            }
+        })
+        var app = new Vue({
+            el: '#app',
+        })
+    </script>
+</body>
+
+</html>
