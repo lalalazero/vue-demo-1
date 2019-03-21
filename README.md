@@ -78,3 +78,11 @@ v-bind 绑定 style 和 class 的语法(变量、对象、数组)
 - chap9 render 函数
 
 - chap10 函数化组件
+
+- chap11 vue-cli
+
+- chap12 vue-router
+
+- chap13 axios
+
+- chap14 vuex
